@@ -1,0 +1,259 @@
+{% extends "core.html" %}
+
+{% load static %}
+
+{% block title %}Órdenes de trabajo{% endblock title %}
+
+{% block content %}
+    <section class="section-list">
+        <div class="header-section">
+            <h1>Órdenes de trabajo</h1>
+        </div>
+        <div class="content-section">
+            <aside class="aside-menu">
+                <form action="" method="get" id="form-search-order">
+                    <input type="text" name="search-text" id="text-search" class="inp-text-aside" placeholder="Buscar...">
+
+                    <label for="input-status" class="opt-label">Status</label>
+                    <select id="input-status" class="inp-select-aside" name="status">
+                        <option value="null" {{ status_opt_1 }}>Todas las órdenes</option>
+                        <option value="to_assign" {{ status_opt_2 }}>Sin asignar</option>
+                        <option value="assigned" {{ status_opt_3 }}>Asignada, por realizar</option>
+                        <option value="completed" {{ status_opt_4 }}>Finalizada</option>
+                        <option value="closed" {{ status_opt_5 }}>Cerrada, sin completar</option>
+                    </select>
+
+                    <label for="input-sort-by" class="opt-label">Ordenar por</label>
+                    <select id="input-sort-by" class="inp-select-aside" name="sort-by">
+                        <option value="-pk" {{ sort_opt_1 }}>Nro. De Orden</option>
+                        <option value="customer" {{ sort_opt_2 }}>Nro. De Contrato</option>
+                        <option value="date_created" {{ sort_opt_3 }}>Fecha de creación</option>
+                        <option value="customer__address" {{ sort_opt_4 }}>Dirección</option>
+                    </select>
+                    
+                    <label for="input-sort-by" class="opt-label">Desde</label>
+                    <input type="date" name="min-date" id="input-min-date" class="inp-text-aside" value="{{ min_date }}">
+                    
+                    <label for="input-sort-by" class="opt-label">Hasta</label>
+                    <input type="date" name="max-date" id="input-max-date" class="inp-text-aside" value="{{ max_date }}">
+                    
+                    <input class="btn-submit" type="submit" value="Aplicar filtros">
+
+
+                </form>
+            </aside>
+            <div class="div-list">
+                <div class="content-list">
+                    {% for order in order_list %}
+                        <div class="card order-card">
+                            <p class="order-card-id sc2">OR - {{ order.pk }}</p>
+                            <hr class="sc2">
+                            <div class="sc1">
+                                <p class="data-label">Nro. De Contrato</p>
+                                <p class="data">C{{ order.customer.contract_number }}</p>
+                            </div>
+                            <div class="sc1">
+                                <p class="data-label">Categoría</p>
+                                <p class="data">{{ order.customer.get_category_display }}</p>
+                            </div>
+                            <div class="sc2">
+                                <p class="data-label">Nombre Cliente</p>
+                                <p class="data">{{ order.customer.customer_name }}</p>
+                            </div>
+                            <div class="sc2">
+                                <p class="data-label">Dirección</p>
+                                <p class="data order-card-address">{{ order.customer.address }}</p>
+                            </div>
+                            <div class="sc1">
+                                <p class="data-label">Teléfono 1</p>
+                                <p class="data">{{ order.customer.phone_1 }}</p>
+                            </div>
+                            <div class="sc1">
+                                <p class="data-label">Plan</p>
+                                <p class="data">{{ order.customer.get_plan_display }}</p>
+                            </div>
+                            <hr class="sc2">
+                            <div class="sc1">
+                                <p class="data-label">Status</p>
+                                {% if order.completed %}
+                                    <p class="data p-order-completed">Finalizada</p>
+                                {% elif order.closed %}
+                                    <p class="data p-order-completed">Cerrada</p>
+                                {% elif order.technician %}
+                                    <p class="data p-order-assigned">Asignada</p>
+                                {% else %}
+                                    <p class="data p-order-to-assign">Por gestionar</p>
+                                {% endif %}
+                            </div>
+                            <div class="sc1">
+                                <p class="data-label">Téc. asignado</p>
+                                <p class="data">
+                                    {% if order.technician %}
+                                        {{ order.technician }}
+                                    {% else %}
+                                        Sin definir
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="sc1">
+                                <p class="data-label">Fecha asignada</p>
+                                <p class="data">
+                                    {% if order.date_assigned %}
+                                        {{ order.date_assigned|date:"d/m/Y h:i" }}
+                                    {% else %}
+                                        Sin definir
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <a href="{% url "order-update" order.pk %}" class="btn-select-order">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_128_573)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 16.2381H16V14.7225H0V16.2381ZM7.8736 11.6912H4.8V8.58116L12.6712 1L16 4.13582L7.8736 11.6912Z" fill="#232323"/></g><defs><clipPath id="clip0_128_573"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <p>No se encontraron órdenes para mostrar</p>
+                    {% endfor %}
+                    
+                </div>
+                <hr class="prev-next-divider">
+                <div class="prev-next-buttons">
+
+                    <a {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}&search-text={{ search_text }}&status={{ status }}&sort-by={{ sort_by }}&min-date={{ min_date }}&max-date={{ max_date }}" class='btn-prev btn-active'{% else %} class="btn-prev" {% endif %}><< Prev</a>
+
+                    <a {% if page_obj.has_next %}href="?page={{ page_obj.next_page_number }}&search-text={{ search_text }}&status={{ status }}&sort-by={{ sort_by }}&min-date={{ min_date }}&max-date={{ max_date }}" class='btn-next btn-active'{% else %} class="btn-next" {% endif %}>Next >></a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+<!--
+<div class="div-cbox-status">
+    <div class="cbox-w-label">
+        <input type="checkbox" name="cbox_to_manage" id="id_cbox_to_manage" class="cbox-status">
+        <label for="id_cbox_to_manage">Por asignar</label>
+    </div>
+    <div class="cbox-w-label">
+        <input type="checkbox" name="cbox_assigned" id="id_cbox_assigned" class="cbox-status">
+        <label for="id_cbox_assigned">Asignada</label>
+    </div>
+    <div class="cbox-w-label">
+        <input type="checkbox" name="cbox_completed" id="id_cbox_completed" class="cbox-status">
+        <label for="id_cbox_completed">Completada</label>
+    </div>
+</div>
+
+    <section class="primary-section">
+        <h1 class="section-header">Órdenes de trabajo</h1>
+        <hr class="divider-section">
+        <div id="content-order-list">
+            <aside class="aside-menu">
+                <form action="/" method="get" id="form-search-order">
+                    <input type="text" name="text" id="text-search" class="input-text" value="{{ s_text }}" placeholder="Buscar...">
+                    <div id="input-select-status">
+                        <h3>Status</h3>
+
+                        <div>
+                            <input type="checkbox" name="cbox_completed" id="id_cbox_completed">
+                            <label for="id_cbox_completed">Completada</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="cbox_completed_1" id="id_cbox_completed_1">
+                            <label for="id_cbox_completed_1">Completada</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="cbox_completed_2" id="id_cbox_completed_2">
+                            <label for="id_cbox_completed_2">Completada</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="cbox_completed_3" id="id_cbox_completed_3">
+                            <label for="id_cbox_completed_3">Completada</label>
+                        </div>
+
+                    </div>
+                    <div id="div-input-sort-by">
+                        <label>Ordenar por</label>
+                        <select id="input-sort-by" class="input-search" name="sort-by">
+                            <option value="" {{ pend }}>Fecha asignada</option>
+                            <option value="" {{ assg }}>Fecha de llegada</option>
+                            <option value="" {{ comp }}>Nro. de contrato</option>
+                            <option value="" {{ comp }}>Dirección</option>
+                        </select>
+                    </div>
+                    <input class="btn btn-filters-submit" type="submit" value="Aplicar filtros">
+                </form>
+            </aside>
+            <div id="order-list">
+                {% for order in order_list %}
+                    <div class="div-order">
+                        <p class="abs-row id-order">OR - {{ order.pk }}</p>
+                        <hr class="abs-row">
+                        <div class="value">
+                            <p class="title">Nro. De Contrato</p>
+                            <p class="content">C{{ order.customer.contract_number }}</p>
+                        </div>
+                        <div class="value">
+                            <p class="title">Categoría</p>
+                            <p class="content">{{ order.customer.category }}</p>
+                        </div>
+
+                        <div class="value abs-row">
+                            <p class="title">Nombre Cliente</p>
+                            <p class="content">{{ order.customer.customer_name }}</p>
+                        </div>
+                        
+                        <div class="value abs-row">
+                            <p class="title">Dirección</p>
+                            <p class="content">{{ order.customer.address }}</p>
+                        </div>
+
+                        <div class="value">
+                            <p class="title">Teléfono 1</p>
+                            <p class="content">{{ order.customer.phone_1 }}</p>
+                        </div>
+                        <div class="value">
+                            <p class="title">Plan</p>
+                            <p class="content">{{ order.customer.plan }}</p>
+                        </div>
+                        <hr class="abs-row">
+                        <div class="value">
+                            <p class="title">Status</p>
+                            
+                            <p class="content">
+                                {% if order.completed %}Finalizada
+                                {% elif order.closed %}Cerrada sin realizar
+                                {% elif order.technician %}Asignada
+                                {% else %}Pendiente
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <div class="value">
+                            <p class="title">Téc. asiganado</p>
+                            <p class="content">
+                                {{ order.technician }}
+                            </p>
+                        </div>
+                        <div class="value">
+                            <p class="title">Fecha a realizar</p>
+                            <p class="content">
+                                {{ order.date_assigned|date:"d/m/Y h:i" }}
+                            </p>
+                        </div>
+                        
+                        
+    
+                        <a href="{% url "order-update" order.pk %}" class="btn-select-order">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_128_573)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 16.2381H16V14.7225H0V16.2381ZM7.8736 11.6912H4.8V8.58116L12.6712 1L16 4.13582L7.8736 11.6912Z" fill="#232323"/></g><defs><clipPath id="clip0_128_573"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            <a {% if page_obj.has_previous %}href="?page={{ page_obj.previous_page_number }}&text={{ s_text }}&status={{ s_status }}&sort_by={{ sort_by }}{% endif %}">Anterior</a>
+            <a {% if page_obj.has_next %}href="?page={{ page_obj.next_page_number }}&text={{ s_text }}&status={{ s_status }}&sort_by={{ sort_by }}{% endif %}">Siguiente</a>
+        </div>
+    </section>
+    -->

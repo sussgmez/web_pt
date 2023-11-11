@@ -1,0 +1,124 @@
+{% extends "core.html" %}
+
+{% load static %}
+{% block content %}
+    <section class="section-detail">
+        <div class="header-section">
+            <h1>Órdenes de trabajo</h1>
+        </div>
+        <div class="content-section">
+            <aside class="aside-menu">
+                <a href="{% url 'order-update' order.pk %}" class="opt-aside opt-aside-2">Volver</a>
+            </aside>
+            <div class="div-detail">
+                <div class="detail-installation">
+                    <h1>Completar: OR-{{ order.pk }}</h1>
+                    {{ form.errors }}
+                        <form action="" class="detail-installation-form">
+                            <div class="sc2">
+                                <label class="data-label" for="id_contract_number">{{ customer_form.contract_number.label }}</label>
+                                {{ customer_form.contract_number }}
+                            </div>
+                            <div class="sc4">
+                                <label class="data-label" for="id_customer_name">{{ customer_form.customer_name.label }}</label>
+                                {{ customer_form.customer_name }}
+                            </div>
+                            <div class="sc3">
+                                <label class="data-label" for="id_category">{{ customer_form.category.label }}</label>
+                                {{ customer_form.category }}
+                            </div>
+                            <div class="sc3">
+                                <label class="data-label" for="id_plan">{{ customer_form.plan.label }}</label>
+                                {{ customer_form.plan }}
+                            </div>
+                            <div class="sc6">
+                                <label class="data-label" for="id_address">{{ customer_form.address.label }}</label>
+                                {{ customer_form.address }}
+                            </div>
+                        </form>
+                        <hr>
+                        <form class="detail-installation-form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="order" value="{{ order.pk }}">
+                            <!-- Box information -->
+                            <div class="sc1">
+                                <label class="data-label" for="id_zone">{{ form.zone.label }}</label>
+                                {{ form.zone }}
+                            </div>
+                            <div class="sc1">
+                                <label class="data-label" for="id_olt">{{ form.olt.label }}</label>
+                                {{ form.olt }}
+                            </div>
+                            <div class="sc1">
+                                <label class="data-label" for="id_card">{{ form.card.label }}</label>
+                                {{ form.card }}
+                            </div>
+                            <div class="sc1">
+                                <label class="data-label" for="id_pon">{{ form.pon.label }}</label>
+                                {{ form.pon }}
+                            </div>
+                            <div class="sc1">
+                                <label class="data-label" for="id_box">{{ form.box.label }}</label>
+                                {{ form.box }}
+                            </div>
+                            <div class="sc1">
+                                <label class="data-label" for="id_port">{{ form.port.label }}</label>
+                                {{ form.port }}
+                            </div>
+
+                            <!-- Information power -->
+                            <div class="sc3">
+                                <label class="data-label" for="id_box_power">{{ form.box_power.label }}</label>
+                                {{ form.box_power }}
+                            </div>
+                            <div class="sc3">
+                                <label class="data-label" for="id_house_power">{{ form.house_power.label }}</label>
+                                {{ form.house_power }}
+                            </div>
+                            <div class="sc6">
+                                <label class="data-label" for="id_onu_serial">{{ form.onu_serial.label }}</label>
+                                {{ form.onu_serial }}
+                            </div>
+                            <div class="sc6">
+                                <label class="data-label" for="id_router_serial">{{ form.router_serial.label }}</label>
+                                {{ form.router_serial }}
+                            </div>
+                            <div class="sc2">
+                                <label class="data-label" for="id_drop_serial">{{ form.drop_serial.label }}</label>
+                                {{ form.drop_serial }}
+                            </div>
+                            <div class="sc2">
+                                <label class="data-label" for="id_drop_used">{{ form.drop_used.label }}</label>
+                                {{ form.drop_used }}
+                            </div>
+                            <div class="sc2">
+                                <label class="data-label" for="id_hook_used">{{ form.hook_used.label }}</label>
+                                {{ form.hook_used }}
+                            </div>
+                            <div class="sc2">
+                                <label class="data-label" for="id_fast_conn_used">{{ form.fast_conn_used.label }}</label>
+                                {{ form.fast_conn_used }}
+                            </div>
+                            <input type="submit" value="Completar" class="sc6 btn-submit">
+                        </form> 
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section>
+        
+        <form action="" method="post">
+            {% csrf_token en %}
+            {{ form.as_div }}
+            <button type='submit'>Completar</button>
+        </form>
+    </section>
+
+    {{ order }}
+
+    <ript>
+        input_order = document.querySelector('#id_order')
+        input_order.value = "{{ order.pk }}"
+    </ript> -->
+
+{%  endblock content %}
