@@ -1,88 +1,94 @@
 {% extends "core.html" %}
 
 {% load static %}
+{% block title %}Órdenes de trabajo{% endblock title %}
+
 {% block content %}
-    <section class="section-detail">
-        <div class="header-section">
+    <main>
+        <div class="header-main">
             <h1>Órdenes de trabajo</h1>
         </div>
-        <div class="content-section">
+        <div class="content-1">
             <aside class="aside-menu">
                 <a href="{% url 'order-list' %}" class="opt-aside opt-aside-2">Lista de órdenes</a>
                 <hr>
                 <a href="{% url 'customer-update' order.customer.pk %}" class="opt-aside">Ver cliente</a>
-                {% if order.technician and not order.completed %}
+                {% if order.technician and not order.closed %}
                 <a href="{% url 'order-complete' %}?order={{ order.pk }}" class="opt-aside">Completar orden</a>
                 {% endif %}
-
+                {% if order.completed %}
+                <a href="{% url 'installation-update' order.installation.pk %}" class="opt-aside">Información instalación</a>
+                {% endif %}
             </aside>
-            <div class="div-detail">
-                <div class="detail-order">
-                    <h1>OR-{{ order.pk }}</h1>
-                    <form class="detail-order-form">
-                        <div class="sc1">
-                            <label class="data-label" for="id_contract_number">{{ customer_form.contract_number.label }}</label>
+            <div class="section-detail">
+                <div class="object-detail">
+                    <h1 class="header-section">OR-{{ order.pk }}</h1>
+                    <form class="form-object-detail form-order-detail">
+                        <div>
+                            <label for="id_contract_number">{{ customer_form.contract_number.label }}</label>
                             {{ customer_form.contract_number }}
                         </div>
-                        <div class="sc2">
-                            <label class="data-label" for="id_customer_name">{{ customer_form.customer_name.label }}</label>
+                        <div class="columns-2">
+                            <label for="id_customer_name">{{ customer_form.customer_name.label }}</label>
                             {{ customer_form.customer_name }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_plan">{{ customer_form.plan.label }}</label>
+                        <div>
+                            <label for="id_plan">{{ customer_form.plan.label }}</label>
                             {{ customer_form.plan }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_phone_1">{{ customer_form.phone_1.label }}</label>
+                        <div>
+                            <label for="id_phone_1">{{ customer_form.phone_1.label }}</label>
                             {{ customer_form.phone_1 }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_phone_2">{{ customer_form.phone_2.label }}</label>
+                        <div>
+                            <label for="id_phone_2">{{ customer_form.phone_2.label }}</label>
                             {{ customer_form.phone_2 }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_category">{{ customer_form.category.label }}</label>
+                        <div>
+                            <label for="id_category">{{ customer_form.category.label }}</label>
                             {{ customer_form.category }}
                         </div>
-                        <div class="sc2">
-                            <label class="data-label" for="id_address">{{ customer_form.address.label }}</label>
+                        <div class="columns-2 input-address">
+                            <label for="id_address">{{ customer_form.address.label }}</label>
                             {{ customer_form.address }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_customer_type">{{ customer_form.customer_type.label }}</label>
+                        <div>
+                            <label for="id_customer_type">{{ customer_form.customer_type.label }}</label>
                             {{ customer_form.customer_type }}
                         </div>
-                        <div class="sc2">
-                            <label class="data-label" for="id_comment">{{ customer_form.comment.label }}</label>
+                        <div class="columns-2 input-comment" >
+                            <label for="id_comment">{{ customer_form.comment.label }}</label>
                             {{ customer_form.comment }}
                         </div>
                     </form>
                     <hr>
-                    <form class="detail-order-form" {% if order.closed %}id="disabled-form"{% endif %} method="post">
+                    <form class="form-object-detail form-order-detail" {% if order.closed %}id="disabled-form"{% endif %} method="post">
                         {% csrf_token %}
-                        <div class="sc1">
-                            <label class="data-label">Status</label>
+                        <div>
+                            <label >Status</label>
                             <input type="text" name="" id="" value="{{ status }}" disabled>
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_technician">{{ form.technician.label }}</label>
+                        <div>
+                            <label  for="id_technician">{{ form.technician.label }}</label>
                             {{ form.technician }}
                         </div>
-                        <div class="sc1">
-                            <label class="data-label" for="id_date_assigned">{{ form.date_assigned.label }}</label>
+                        <div>
+                            <label  for="id_date_assigned">{{ form.date_assigned.label }}</label>
                             {{ form.date_assigned }}
                         </div>
-                        <div class="sc3">
-                            <label class="data-label" for="id_extra_order_comment">{{ form.extra_order_comment.label }}</label>
+                        <div class="columns-2 input-extra-order-comment">
+                            <label  for="id_extra_order_comment">{{ form.extra_order_comment.label }}</label>
                             {{ form.extra_order_comment }}
                         </div>
-                        <input type="submit" value="Editar" class="btn-submit" {% if order.closed %}disabled{% endif %}>
-                        <a href="{% url 'delete-order' order.pk %}" class="btn-delete">Eliminar</a>
+                        <div class="columns-3">
+                            <button type="submit" class="btn btn-submit" {% if order.closed %}disabled{% endif %}>Editar</button>
+                            <a href="{% url 'delete-order' order.pk %}" class="btn btn-delete">Eliminar</a>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
     <script>
         inputs = document.querySelector('#disabled-form').querySelectorAll('input')
         selects = document.querySelector('#disabled-form').querySelectorAll('select')

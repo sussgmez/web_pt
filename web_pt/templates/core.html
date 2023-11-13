@@ -18,21 +18,26 @@
     <link rel="stylesheet" href="{% static "style.css" %}"> 
 </head>
 <body>
+    <!-- Header -->
     <header id="page-header">
+        <!-- Logo -->
         <a href='{% url "order-list" %}' id="page-logo">
             <img src="{% static "logo.png" %}" alt="pt">
         </a>
         {% if user.is_authenticated %}
-            <nav id="header-navbar">
-                <a class="nav-option" href="{% url "order-list" %}">Órdenes de trabajo</a>
-                <a class="nav-option" href="{% url "customer-list" %}">Clientes</a>
-                <a class="nav-option">Técnicos</a>
-                <a class="nav-option" href="{% url 'logout' %}">Cerrar Sesión</a>
-            </nav>
+        <!-- Navbar -->
+        <nav id="header-navbar">
+            <a class="nav-option" href="{% url 'order-list' %}">Órdenes de trabajo</a>
+            <a class="nav-option" href="{% url 'customer-list' %}">Clientes</a>
+            <a class="nav-option" href="{% url 'technician-list' %}">Técnicos</a>
+            <a class="nav-option" href="{% url 'logout' %}">Cerrar Sesión</a>
+        </nav>
         {% endif %}
     </header>
 
+    <!-- Content -->
     {% block content %}
     {% endblock content %}
+
 </body>
 </html>

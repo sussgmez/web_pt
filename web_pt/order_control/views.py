@@ -15,7 +15,7 @@ def check_nan(value):
 class CustomerListView(ListView):
     model = Customer
     template_name = "order_control/customer_list.html.html"
-    paginate_by = 18
+    paginate_by = 12
     ordering = 'contract_number'
 
     def get_context_data(self, **kwargs):
@@ -38,24 +38,20 @@ class CustomerListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            context['s_text'] = self.request.GET['text']
-            
-            s_status = self.request.GET['status']
-            sort_by = self.request.GET['sort_by']
 
-            context['s_status'] = s_status
-            context['sort_by'] = sort_by
-
-            if s_status == 'all': context['all'] = 'selected'
-            elif s_status == 'pend': context['pend'] = 'selected'
-            elif s_status == 'assg': context['assg'] = 'selected'
-            elif s_status == 'comp': context['comp'] = 'selected'
-
-            if sort_by == 'pk': context['pk'] = 'selected'
-            elif sort_by == 'date_assigned': context['date_assigned'] = 'selected'
-
+        try: 
+            context["search_text"] = self.request.GET['search-text']
         except: pass
+
+        context["sort_by"] = '-pk'
+        try: 
+            sort_by = self.request.GET['sort-by']
+            context["sort_by"] = sort_by
+            if sort_by == '-pk': context['sort_opt_1'] = 'selected'
+            elif sort_by == 'date_created': context['sort_opt_2'] = 'selected'
+            elif sort_by == 'address': context['sort_opt_3'] = 'selected'
+        except: pass
+
         return context
 
 
@@ -85,7 +81,7 @@ class OrderUpdateView(UpdateView):
 class OrderListView(ListView):
     model = Order
     template_name = "order_control/order_list.html"
-    paginate_by = 12
+    paginate_by = 6
     
     def get_queryset(self):
         s_text = ""
@@ -176,7 +172,7 @@ class CustomerUpdateView(UpdateView):
     
 
     def get_success_url(self):
-        return reverse('customer-list')
+        return reverse('customer-update', kwargs={'pk':self.object.pk})
 
 
 class CustomerCreateView(CreateView):
@@ -298,3 +294,22 @@ def delete_order(request, pk):
 def delete_customer(request, pk):
     Customer.objects.get(pk=pk).delete()
     return redirect('customer-list')
+
+
+class TechnicianListView(ListView):
+    model = Technician
+    template_name = "technician_list.html"
+
+
+class InstallationUpdateView(UpdateView):
+    model = Installation
+    template_name = "order_control/installation.html"
+    form_class = InstallationForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["customer_form"] = ShowCustomerAsForm(instance=self.object.order.customer)
+        return context
+
+    def get_success_url(self):
+        return reverse('order-update', kwargs={'pk':self.object.order.pk})

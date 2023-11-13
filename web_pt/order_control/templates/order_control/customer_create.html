@@ -1,17 +1,76 @@
 {% extends "core.html" %}
 
 {% load static %}
+{% block title %}Clientes{% endblock title %}
+
 {% block content %}
-    <section class="principal-section">
-        <div class="center-form">
-            <div class="div-add-customer">
-                <h1>Añadir cliente</h1>
-                <form action="" method="post" id="add-customer-form">
-                    {% csrf_token %}
-                    {{ form.as_div }}
-                    <button type="submit" class="btn btn-add-form">Añadir</button>
-                </form>
-            </div>
+    <main>      
+        <div class="header-main">
+            <h1>Clientes</h1>
         </div>
-    </section>
+        <div class="content-1">
+            <aside class="aside-menu">
+                <a href="{% url 'customer-list' %}" class="opt-aside opt-aside-2">Lista de clientes</a>
+            </aside>
+            <section class="section-detail">
+                <div class="object-detail">
+                    <h1 class="header-section">Añadir nuevo cliente</h1>
+                    <form class="form-object-detail form-customer-detail" method="post">
+                        {% csrf_token %}
+                        <div>
+                            <label for="id_contract_number">{{ form.contract_number.label }}</label>
+                            {{ form.contract_number }}
+                        </div>
+                        <div class="columns-2">
+                            <label for="id_customer_name">{{ form.customer_name.label }}</label>
+                            {{ form.customer_name }}
+                        </div>
+                        <div class="columns-3">
+                            <label for="id_address">{{ form.address.label }}</label>
+                            {{ form.address }}
+                        </div>
+                        <div>
+                            <label for="id_phone_1">{{ form.phone_1.label }}</label>
+                            {{ form.phone_1 }}
+                        </div>
+                        <div>
+                            <label for="id_phone_2">{{ form.phone_2.label }}</label>
+                            {{ form.phone_2 }}
+                        </div>
+                        <div>
+                            <label for="id_email">{{ form.email.label }}</label>
+                            {{ form.email }}
+                        </div>
+                        <div>
+                            <label for="id_customer_type">{{ form.customer_type.label }}</label>
+                            {{ form.customer_type }}
+                        </div>
+                        <div>
+                            <label for="id_category">{{ form.category.label }}</label>
+                            {{ form.category }}
+                        </div>
+                        <div>
+                            <label for="id_plan">{{ form.plan.label }}</label>
+                            {{ form.plan }}
+                        </div>
+                        <div>
+                            <label for="id_assigned_to">{{ form.assigned_to.label }}</label>
+                            {{ form.assigned_to }}
+                        </div>
+                        <div>
+                            <label for="id_seller">{{ form.seller.label }}</label>
+                            {{ form.seller }}
+                        </div>
+                        <div class="columns-3">
+                            <label for="id_comment">{{ form.comment.label }}</label>
+                            {{ form.comment }}
+                        </div>
+                        <div class="columns-2">
+                            <button type="submit" class="btn btn-submit">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
 {% endblock content %}

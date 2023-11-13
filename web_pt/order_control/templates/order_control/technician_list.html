@@ -1,0 +1,119 @@
+{% extends "core.html" %}
+
+{% load static %}
+{% load order_control_extras %}
+{% block title %}Técnicos{% endblock title %}
+
+{% block content %}
+    <main>
+        <div class="header-main">
+            <h1>Técnicos</h1>
+        </div>
+        <div class="content-2">
+            <section class="section-technicians">
+                {% for technician in technician_list %}
+                <div class="technician">
+                    <h2 class="header-technician">{{ technician.name }}</h2>
+                    {% if technician.orders.all|not_closed %}
+                    <div class="content-technician">
+                        <div class="technician-order-list">
+                            {% for order in technician.orders.all|not_closed %}
+                            <a href="{% url 'order-update' order.pk %}" class="technician-order">
+                                <p class="order-pk">OR-{{ order.pk }}<p>
+                                <hr class="columns-2">
+                                <div>
+                                    <p class="label">Nro. De Contrato</p>
+                                    <p>{{ order.customer.contract_number }}</p>
+                                </div>
+                                <div>
+                                    <p class="label">Categoría</p>
+                                    <p>{{ order.customer.get_category_display }}</p>
+                                </div>
+                                <div class="columns-2">
+                                    <p class="label">Nombre cliente</p>
+                                    <p>{{ order.customer.customer_name }}</p>
+                                </div>
+                                <div class="columns-2">
+                                    <p class="label">Dirección</p>
+                                    <p class="data order-address">{{ order.customer.address }}</p>
+                                </div>
+                                <div>
+                                    <p class="label">Teléfono</p>
+                                    <p>{{ order.customer.phone_1 }}</p>
+                                </div>
+                                <div>
+                                    <p class="label">Fecha asignada</p>
+                                    <p>{% if order.date_assigned %}{{ order.date_assigned|date:"d/m/Y h:i" }}{% else %}---- ----{% endif %}</p>
+                                </div>
+                                <div class="columns-2">
+                                    <p class="label">Observación</p>
+                                    <p>{% if order.extra_order_comment %}{{ order.extra_order_comment }}{% else %}---- ----{% endif %}</p>
+                                </div>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        <div class="orders-message">
+                            {% for order in technician.orders.all|not_closed %}
+                                <div class="order-message">
+                                    <p><b>{{ order.customer.contract_number }}</b> | {{ order.customer.customer_name }}</p>
+                                    <p>{{ order.customer.address|only_100_chars }}</p>
+                                    <p>{{ order.customer.phone_1 }}</p>
+                                    <p>{% if order.date_assigned %}{{ order.date_assigned|date:"d/m/Y h:i" }}{% else %}Sin hora asignada{% endif %}</p>
+                                </div>
+                                <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% else %}
+                        <p class="p-not-found">Técnico no posee órdenes asignadas</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+{% endblock content %}
+
+
+<!-- {% for technician in technician_list %}
+    <h1>{{ technician.name }}</h1>
+    <div class="orders">
+        {% for order in orders %}
+            {% if order.technician == technician %}
+                <div class="order">
+                    <p>{{ order.customer.contract_number }}</p>
+                    <div>
+                        <p>Nombre cliente</p>
+                        <p>{{ order.customer.customer_name }}</p>
+                    </div>
+                    <div>
+                        <p>Dirección</p>
+                        <p>{{ order.customer.address }}</p>
+                    </div>
+                    <div>
+                        <p>Teléfono</p>
+                        <p>{{ order.customer.phone_1 }}</p>
+                    </div>
+                    <div>
+                        <p>Fecha asignada</p>
+                        <p>{{ order.date_assigned|date:"d/m/Y h:i" }}</p>
+                    </div>
+                    <div>
+                        <p>Observación</p>
+                        <p>{{ order.extra_order_comment }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for order in orders %}
+            {% if order.technician == technician %}
+                {{ order.customer.contract_number }} | {{ order.customer.customer_name }}
+                {{order.customer.address }}
+                {{ order.customer.phone_1 }}
+                {{ order.date_assigned|date:"d/m/Y h:i" }}
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+{% endfor %} -->

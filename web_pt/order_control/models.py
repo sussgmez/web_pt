@@ -81,7 +81,7 @@ class Customer(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, verbose_name=_("Cliente"), on_delete=models.CASCADE)
-    technician = models.ForeignKey(Technician, verbose_name=_("Técnico"), on_delete=models.CASCADE, blank=True, null=True)
+    technician = models.ForeignKey(Technician, verbose_name=_("Técnico"), on_delete=models.CASCADE, blank=True, null=True, related_name="orders", related_query_name='order')
     completed = models.BooleanField(_("Completada"), default=False)
     extra_order_comment = models.CharField(_("Información extra"), max_length=200, blank=True, null=True)
     closed = models.BooleanField(_("Orden Cerrada"), default=False)

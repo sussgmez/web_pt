@@ -10,11 +10,11 @@
         </div>
         <div class="content-1">
             <aside class="aside-menu">
-                <a href="{% url 'order-update' order.pk %}" class="opt-aside opt-aside-2">Volver</a>
+                <a href="{% url 'order-update' installation.order.pk %}" class="opt-aside opt-aside-2">Volver</a>
             </aside>
             <section class="section-detail">
                 <div class="object-detail installation-detail">
-                    <h1 class="header-section">Completar: OR-{{ order.pk }}</h1>
+                    <h1 class="header-section">Completar: OR-{{ installation.order.pk }}</h1>
                     <form action="" class="form-object-detail form-installation-detail">
                         <div>
                             <label for="id_contract_number">{{ customer_form.contract_number.label }}</label>
@@ -40,7 +40,6 @@
                     <hr>
                     <form class="form-object-detail form-installation-detail" method="post">
                         {% csrf_token %}
-                        <input type="hidden" name="order" value="{{ order.pk }}">
                         <div class="inputs-box columns-2">
                             <div>
                                 <label for="id_zone">{{ form.zone.label }}</label>
@@ -100,7 +99,7 @@
                             {{ form.fast_conn_used }}
                         </div>
                         <div>
-                            <button class="columns-6 btn btn-submit" type="submit">Completar</button>
+                            <button class="columns-6 btn btn-submit" type="submit">Editar</button>
                         </div>
                     </form> 
                 </div>
