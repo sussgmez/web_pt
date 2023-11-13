@@ -40,6 +40,7 @@
                     <hr>
                     <form class="form-object-detail form-installation-detail" method="post">
                         {% csrf_token %}
+                        {{ form.order }}
                         <div class="inputs-box columns-2">
                             <div>
                                 <label for="id_zone">{{ form.zone.label }}</label>

@@ -58,5 +58,7 @@ class ShowCustomerAsForm(forms.ModelForm):
 class InstallationForm(forms.ModelForm):
     class Meta:
         model = Installation
-        fields = ["zone", "olt", "pon", "card", "box", "port", "box_power", "house_power", "onu_serial", "router_serial", "drop_serial", "drop_used", "hook_used", "fast_conn_used", "extra_comment"]
-        
+        fields = ["order", "zone", "olt", "pon", "card", "box", "port", "box_power", "house_power", "onu_serial", "router_serial", "drop_serial", "drop_used", "hook_used", "fast_conn_used", "extra_comment"]
+        widgets = {
+            'order': forms.HiddenInput()
+        }
