@@ -15,7 +15,7 @@
             <section class="section-detail">
                 <div class="object-detail installation-detail">
                     <h1 class="header-section">Completar: OR-{{ order.pk }}</h1>
-                    <form action="" class="form-object-detail form-installation-detail">
+                    <form class="form-object-detail form-installation-detail">
                         <div>
                             <label for="id_contract_number">{{ customer_form.contract_number.label }}</label>
                             {{ customer_form.contract_number }}
@@ -104,7 +104,17 @@
                         </div>
                     </form> 
                 </div>
+                <div class="installation-message">
+                    <button class="btn" onclick="get_message()">Generar mensaje</button>
+                    <textarea id="id_message" readonly></textarea>
+                </div>
             </section>
         </div>
     </main>
+    <script>
+        function get_message() {
+            message = `*Validar potencia*\n*Nro. De Contrato:* ${document.querySelector('#id_contract_number').value}\n*Nombre:* ${document.querySelector('#id_customer_name').value}\n*Dirección:* ${document.querySelector('#id_address').value}\n*Z${document.querySelector('#id_zone').value}.OLT${document.querySelector('#id_olt').value}.T${document.querySelector('#id_card').value}.PON${document.querySelector('#id_pon').value}.C${document.querySelector('#id_box').value}.PUERTO${document.querySelector('#id_port').value}*\n*PC:* ${document.querySelector('#id_box_power').value}\n*PR:* ${document.querySelector('#id_house_power').value}\n*Serial Del Equipo:* ${document.querySelector('#id_onu_serial').value}\n*Fibra DROP:* ${document.querySelector('#id_drop_serial').value}/${document.querySelector('#id_drop_used').value}\n*Tensores:*${document.querySelector('#id_hook_used').value}\n*Conectores:*${document.querySelector('#id_fast_conn_used').value}`
+            document.querySelector("#id_message").innerHTML = message
+        }
+    </script>
 {%  endblock content %}
