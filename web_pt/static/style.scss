@@ -1,6 +1,6 @@
 /* Variables */ 
 $blue-1: #001736;
-$blue-2: #4C90EF;
+$blue-2: #398cff;
 $blue-3: #d5e6ff;
 $gray-1: #b7b7b7;
 $gray-2: #707070;
@@ -10,6 +10,7 @@ $red-1: #c12f2f;
 $red-2: #ffebeb;
 $green-1: #277331;
 $yellow-1: #A18600;
+$black: #000;
 
 $lg_screen: 1190px;
 $md_screen: 900px;
@@ -142,17 +143,80 @@ main {
         }
     }
 }
-
 .content-1 {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 17rem 1fr;
     .aside-menu {
-        background-color: $blue-3;
+        border-right: 1px solid $gray-2;
         padding: 1rem;
-        margin: 1rem;
-        border-radius: 0.25rem;
-        height: fit-content;
+        .input-search {
+            border: 1px solid rgba($black, $alpha: 0.2);
+            padding: 0.5rem;
+            width: 100%;
+            font-size: 0.75rem;
+            font-weight: 500;
+            appearance: none;
+            margin-bottom: 0.5rem;
+        }
+        .label-search {
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+        .btn {
+            display: block;
+            cursor: pointer;
+            width: 100%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            padding: 0.6rem 0.5rem;
+            border: 1px solid transparent;
+        }
+        .btn-1 {
+            background-color: $blue-2;
+            color: $white;
+            margin-bottom: 0.5rem;
+            &:hover {
+                background-color: rgba($blue-2, $alpha: 0.8);
+            }
+        }
+        .btn-2 {
+            background-color: rgba($blue-1, $alpha: 0.8);
+            color: $white;
+            margin-bottom: 0.5rem;
+            &:hover {
+                background-color: rgba($blue-1, $alpha: 0.7);
+            }
+        }
+        .btn-submit {
+            border: 1px solid transparent;
+            background-color: $blue-1;
+            color: $white;
+            margin-top: 0.5rem;
+            &:hover {
+                border: 1px solid $blue-1;
+                background-color: $white;
+                color: $blue-1;
+            }
+        }
+        hr {
+            border: none;
+            border-bottom: 1px solid $black;
+        }
+        @media (max-width: $sm_screen) {
+            border: 1px solid $gray-2
+        }
+
+        /*
+        .inp-select-aside {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            border: 1px solid rgba($black, $alpha: 0.2);
+            font-weight: 600;
+        }
         .opt-aside {
             text-decoration: none;
             text-align: center;
@@ -187,20 +251,7 @@ main {
             border-bottom: 1px solid $blue-2;
             margin: 1rem 0;
         }
-        .inp-text-aside {
-            padding: 0.6rem;
-            width: 100%;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            border: 1px solid $blue-2;
-            border-radius: 0.25rem;
-        }
-        .opt-label {
-            font-weight: 600;
-            font-size: 0.75rem;
-            margin: 0 0 0.5rem 0;
-        }
+        
         .div-cbox-status {
             font-weight: 500;
             font-size: 0.75rem;
@@ -215,39 +266,8 @@ main {
                 margin: 0 0.25rem;
             }
             .cbox-status {cursor: pointer;}
-        }
-        .inp-select-aside {
-            padding: 0.5rem;
-            width: 100%;
-            font-size: 0.8rem;
-            background-color: $blue-2;
-            border: 1px solid $blue-2;
-            color: $blue-3;
-            font-weight: 600;
-            border-radius: 0.25rem;
-            margin-bottom: 0.5rem;
-            option {
-                background-color: $white;
-                color: $blue-1;
-            }
-        }
-        .btn-submit {
-            cursor: pointer;
-            width: 100%;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid transparent;
-            background-color: $blue-1;
-            color: $white;
-            padding: 0.75rem 0.5rem;
-            border-radius: 0.25rem;
-            margin-top: 1.25rem;
-            &:hover {
-                border: 1px solid $blue-1;
-                background-color: $white;
-                color: $blue-1;
-            }
-        }
+        }*/
+        
     }
     .section-list {
         padding: 2rem;

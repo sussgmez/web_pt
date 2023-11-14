@@ -13,19 +13,19 @@
                 <form action="{% url 'load-excel' %}" method="post" enctype="multipart/form-data" id="select-excel-file">
                     {% csrf_token %}
                     <input type="file" name="excel_file" id="input-excel-file" onchange="this.form.submit()" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display: none;">
-                    <input type="button" class="opt-aside" value="Importar .xlsx" onclick="document.getElementById('input-excel-file').click()">
+                    <input type="button" class="btn btn-1" value="Importar .xlsx" onclick="document.getElementById('input-excel-file').click()">
                 </form>
-                <a type="button" class="opt-aside" href="{% url 'customer-create' %}">Añadir +</a>
+                <a type="button" class="btn btn-1" href="{% url 'customer-create' %}">Añadir +</a>
                 <hr>
                 <form action="" method="get" id="form-search-order">
-                    <input type="text" name="search-text" id="text-search" class="inp-text-aside" placeholder="Buscar...">
-                    <label for="input-sort-by" class="opt-label">Ordenar por</label>
-                    <select id="input-sort-by" class="inp-select-aside" name="sort-by">
+                    <input type="text" name="search-text" id="text-search" class="input-search" placeholder="Buscar...">
+                    <label for="input-sort-by" class="label-search">Ordenar por</label>
+                    <select id="input-sort-by" class="input-search" name="sort-by">
                         <option value="-pk" {{ sort_opt_1 }}>Nro. De Contrato</option>
                         <option value="date_created" {{ sort_opt_2 }}>Fecha de creación</option>
                         <option value="address" {{ sort_opt_3 }}>Dirección</option>
                     </select>
-                    <input class="btn-submit" type="submit" value="Aplicar filtros">
+                    <input class="btn btn-submit" type="submit" value="Aplicar filtros">
                 </form>
             </aside>
             <section class="section-list">

@@ -10,10 +10,10 @@
         </div>
         <div class="content-1">
             <aside class="aside-menu">
-                <form action="" method="get" id="form-search-order">
-                    <input type="text" name="search-text" id="text-search" class="inp-text-aside" placeholder="Buscar...">
-                    <label for="input-status" class="opt-label">Status</label>
-                    <select id="input-status" class="inp-select-aside" name="status">
+                <form action="" method="get" id="form-search">
+                    <input type="text" name="search-text" id="text-search" class="input-search" placeholder="Buscar...">
+                    <label for="input-status" class="label-search">Status</label>
+                    <select id="input-status" class="input-search" name="status">
                         <option value="null" {{ status_opt_1 }}>Todas las órdenes</option>
                         <option value="to_assign" {{ status_opt_2 }}>Sin asignar</option>
                         <option value="assigned" {{ status_opt_3 }}>Asignada, por realizar</option>
@@ -21,21 +21,21 @@
                         <option value="closed" {{ status_opt_5 }}>Cerrada, sin completar</option>
                     </select>
 
-                    <label for="input-sort-by" class="opt-label">Ordenar por</label>
-                    <select id="input-sort-by" class="inp-select-aside" name="sort-by">
+                    <label for="input-sort-by" class="label-search">Ordenar por</label>
+                    <select id="input-sort-by" class="input-search" name="sort-by">
                         <option value="-pk" {{ sort_opt_1 }}>Nro. De Orden</option>
                         <option value="customer" {{ sort_opt_2 }}>Nro. De Contrato</option>
                         <option value="date_created" {{ sort_opt_3 }}>Fecha de creación</option>
                         <option value="customer__address" {{ sort_opt_4 }}>Dirección</option>
                     </select>
                     
-                    <label for="input-sort-by" class="opt-label">Desde</label>
-                    <input type="date" name="min-date" id="input-min-date" class="inp-text-aside" value="{{ min_date }}" onchange="check_dates()">
+                    <label for="input-sort-by" class="label-search">Desde</label>
+                    <input type="date" name="min-date" id="input-min-date" class="input-search" value="{{ min_date }}" onchange="check_dates()">
                     
-                    <label for="input-sort-by" class="opt-label">Hasta</label>
-                    <input type="date" name="max-date" id="input-max-date" class="inp-text-aside" value="{{ max_date }}" onchange="check_dates()">
-                    
-                    <input class="btn-submit" type="submit" value="Aplicar filtros">
+                    <label for="input-sort-by" class="label-search">Hasta</label>
+                    <input type="date" name="max-date" id="input-max-date" class="input-search" value="{{ max_date }}" onchange="check_dates()">
+                    <hr>
+                    <input class="btn btn-submit" type="submit" value="Aplicar filtros">
                 </form>
             </aside>
             <section class="section-list">
