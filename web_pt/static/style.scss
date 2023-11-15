@@ -146,9 +146,8 @@ main {
 .content-1 {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 17rem 1fr;
+    grid-template-columns: 17rem 1px 1fr;
     .aside-menu {
-        border-right: 1px solid $gray-2;
         padding: 1rem;
         .input-search {
             border: 1px solid rgba($black, $alpha: 0.2);
@@ -173,11 +172,15 @@ main {
             text-align: center;
             padding: 0.6rem 0.5rem;
             border: 1px solid transparent;
+            margin-bottom: 0.5rem;
+            &:last-child {
+                margin: 0;
+            }
         }
         .btn-1 {
             background-color: $blue-2;
             color: $white;
-            margin-bottom: 0.5rem;
+            
             &:hover {
                 background-color: rgba($blue-2, $alpha: 0.8);
             }
@@ -185,7 +188,7 @@ main {
         .btn-2 {
             background-color: rgba($blue-1, $alpha: 0.8);
             color: $white;
-            margin-bottom: 0.5rem;
+            
             &:hover {
                 background-color: rgba($blue-1, $alpha: 0.7);
             }
@@ -205,9 +208,12 @@ main {
             border: none;
             border-bottom: 1px solid $black;
         }
-        @media (max-width: $sm_screen) {
-            border: 1px solid $gray-2
-        }
+    }
+    .divider {
+        border: none;
+        border-right: 1px solid $gray-1;
+        height: 100%;
+        margin: 0;
     }
     .section-list {
         padding: 2rem;
@@ -315,15 +321,15 @@ main {
                 color: $green-1;
                 border-radius: 0.25rem;
             }
-            
             .btn-select-order {
                 position: absolute;
                 top: 1rem;
                 right: 1rem;
             }
+            div {overflow: hidden;}
         }
         .customer-card {
-            min-width: 260px;
+            min-width: 200px;
             width: 100%;
             p {
                 margin: 0.25rem 0;
@@ -521,6 +527,7 @@ main {
     .orders-in-customer {
         margin: 4rem 0 0 0;
         max-width: 800px;
+        padding: 0.5rem;
         .header-orders-in-customer {
             display: flex;
             justify-content: space-between;
@@ -564,17 +571,22 @@ main {
     }
     @media (max-width:$sm_screen) {
         grid-template-columns: 1fr;
-        max-width: 400px;
-        padding: 2rem 0.5rem;
-        gap: 1rem;
-        margin: auto;
-        .aside-menu {
-            margin: 0 auto 1rem auto;
+
+       .aside-menu {
+            margin: 0 auto;
             max-width: 300px;
             width: 100%;
         }
-        .section-list, .section-detail {
-            padding: 0;
+        .divider {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid $gray-1;
+        }
+        .section-list {
+            padding: 1rem;
+        }
+        .section-detail {
+            padding: 1rem 0;
         }
         
     }

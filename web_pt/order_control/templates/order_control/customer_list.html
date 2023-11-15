@@ -13,8 +13,8 @@
                 <form action="{% url 'load-excel' %}" method="post" enctype="multipart/form-data" id="select-excel-file">
                     {% csrf_token %}
                     <input type="file" name="excel_file" id="input-excel-file" onchange="this.form.submit()" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display: none;">
-                    <input type="button" class="btn btn-1" value="Importar .xlsx" onclick="document.getElementById('input-excel-file').click()">
                 </form>
+                <button class="btn btn-1" onclick="document.getElementById('input-excel-file').click()">Importar .xlsx</button>
                 <a type="button" class="btn btn-1" href="{% url 'customer-create' %}">Añadir +</a>
                 <hr>
                 <form action="" method="get" id="form-search-order">
@@ -28,6 +28,7 @@
                     <input class="btn btn-submit" type="submit" value="Aplicar filtros">
                 </form>
             </aside>
+            <hr class="divider">
             <section class="section-list">
                 <div class="object-list">
                     {% for customer in customer_list %}

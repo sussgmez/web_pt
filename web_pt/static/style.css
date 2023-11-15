@@ -143,10 +143,9 @@ main .header-main h1 {
 .content-1 {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 17rem 1fr;
+  grid-template-columns: 17rem 1px 1fr;
 }
 .content-1 .aside-menu {
-  border-right: 1px solid #707070;
   padding: 1rem;
 }
 .content-1 .aside-menu .input-search {
@@ -172,11 +171,14 @@ main .header-main h1 {
   text-align: center;
   padding: 0.6rem 0.5rem;
   border: 1px solid transparent;
+  margin-bottom: 0.5rem;
+}
+.content-1 .aside-menu .btn:last-child {
+  margin: 0;
 }
 .content-1 .aside-menu .btn-1 {
   background-color: #398cff;
   color: #FFF;
-  margin-bottom: 0.5rem;
 }
 .content-1 .aside-menu .btn-1:hover {
   background-color: rgba(57, 140, 255, 0.8);
@@ -184,7 +186,6 @@ main .header-main h1 {
 .content-1 .aside-menu .btn-2 {
   background-color: rgba(0, 23, 54, 0.8);
   color: #FFF;
-  margin-bottom: 0.5rem;
 }
 .content-1 .aside-menu .btn-2:hover {
   background-color: rgba(0, 23, 54, 0.7);
@@ -204,10 +205,11 @@ main .header-main h1 {
   border: none;
   border-bottom: 1px solid #000;
 }
-@media (max-width: 620px) {
-  .content-1 .aside-menu {
-    border: 1px solid #707070;
-  }
+.content-1 .divider {
+  border: none;
+  border-right: 1px solid #b7b7b7;
+  height: 100%;
+  margin: 0;
 }
 .content-1 .section-list {
   padding: 2rem;
@@ -321,8 +323,11 @@ main .header-main h1 {
   top: 1rem;
   right: 1rem;
 }
+.content-1 .object-list .order-card div {
+  overflow: hidden;
+}
 .content-1 .object-list .customer-card {
-  min-width: 260px;
+  min-width: 200px;
   width: 100%;
 }
 .content-1 .object-list .customer-card p {
@@ -528,6 +533,7 @@ main .header-main h1 {
 .content-1 .orders-in-customer {
   margin: 4rem 0 0 0;
   max-width: 800px;
+  padding: 0.5rem;
 }
 .content-1 .orders-in-customer .header-orders-in-customer {
   display: flex;
@@ -572,18 +578,22 @@ main .header-main h1 {
 @media (max-width: 620px) {
   .content-1 {
     grid-template-columns: 1fr;
-    max-width: 400px;
-    padding: 2rem 0.5rem;
-    gap: 1rem;
-    margin: auto;
   }
   .content-1 .aside-menu {
-    margin: 0 auto 1rem auto;
+    margin: 0 auto;
     max-width: 300px;
     width: 100%;
   }
-  .content-1 .section-list, .content-1 .section-detail {
-    padding: 0;
+  .content-1 .divider {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #b7b7b7;
+  }
+  .content-1 .section-list {
+    padding: 1rem;
+  }
+  .content-1 .section-detail {
+    padding: 1rem 0;
   }
 }
 
