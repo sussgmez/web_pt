@@ -21,8 +21,8 @@
                     <input type="text" name="search-text" id="text-search" class="input-search" placeholder="Buscar...">
                     <label for="input-sort-by" class="label-search">Ordenar por</label>
                     <select id="input-sort-by" class="input-search" name="sort-by">
-                        <option value="-pk" {{ sort_opt_1 }}>Nro. De Contrato</option>
-                        <option value="date_created" {{ sort_opt_2 }}>Fecha de creación</option>
+                        <option value="-date_created" {{ sort_opt_1 }}>Fecha de creación</option>
+                        <option value="-pk" {{ sort_opt_2 }}>Nro. De Contrato</option>
                         <option value="address" {{ sort_opt_3 }}>Dirección</option>
                     </select>
                     <input class="btn btn-submit" type="submit" value="Aplicar filtros">

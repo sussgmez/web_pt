@@ -16,7 +16,7 @@ class CustomerListView(ListView):
     model = Customer
     template_name = "order_control/customer_list.html.html"
     paginate_by = 12
-    ordering = 'contract_number'
+    ordering = '-date_created'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -28,7 +28,7 @@ class CustomerListView(ListView):
         try: s_text = self.request.GET['search-text']
         except: pass
 
-        sort_by = "-pk"
+        sort_by = "-date_created"
         try: sort_by = self.request.GET['sort-by']
         except: pass
 
@@ -43,12 +43,12 @@ class CustomerListView(ListView):
             context["search_text"] = self.request.GET['search-text']
         except: pass
 
-        context["sort_by"] = '-pk'
+        context["sort_by"] = '-date_created'
         try: 
             sort_by = self.request.GET['sort-by']
             context["sort_by"] = sort_by
-            if sort_by == '-pk': context['sort_opt_1'] = 'selected'
-            elif sort_by == 'date_created': context['sort_opt_2'] = 'selected'
+            if sort_by == '-date_created': context['sort_opt_1'] = 'selected'
+            elif sort_by == '-pk': context['sort_opt_2'] = 'selected'
             elif sort_by == 'address': context['sort_opt_3'] = 'selected'
         except: pass
 
@@ -224,7 +224,7 @@ def load_excel(request):
             obj = ""
             created = False
             try:
-                for i in range(0,12): values.iloc[i]
+                for i in range(0,11): values.iloc[i]
                 obj, created = Customer.objects.get_or_create(contract_number=values.iloc[0])
             except Exception as e: print(e)
             if created:
@@ -238,7 +238,9 @@ def load_excel(request):
                 
                 category = "INS"
                 seller = check_nan(values.iloc[3]).title()
-                comment = check_nan(values.iloc[11]).capitalize()
+                comment = ""
+                try: comment = check_nan(values.iloc[11]).capitalize()
+                except: pass
 
                 if "Migracion" in seller or "Migración" in seller or "Migracion" in comment or "Migración" in comment:
                     category = "MIG"
