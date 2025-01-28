@@ -1,0 +1,81 @@
+@use '../variables' as v;
+@use '../breakpoints' as b;
+
+#id_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(v.$black, .1);
+    padding: 0.75rem;
+    gap: 0.75rem;
+    #id_logo {
+        padding: 0.35rem;
+        border-radius: 50%;
+        transition: all 0.15s;
+        img {
+            width: 2.25rem;
+        }
+        &:hover {
+            background-color: rgba(v.$black, .05);
+        }
+    }
+    #id_navbar {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(v.$black, .75);
+            border-radius: 4px;
+            transition: all 0.2s;
+            padding: 0.5rem 1rem;
+            &:hover {
+                background-color: rgba(v.$black, .05);
+                color: v.$black;
+            }
+        }
+        .separator {
+            height: 1.75rem;
+            border-right: 1px solid rgba(v.$black, .5);
+            margin: 0 1rem;
+        }
+        #id_btn_logout {
+            color: v.$danger-color;
+            &:hover {
+                color: v.$white;
+                background-color: rgba(v.$danger-color, .8) !important;
+            }
+        }
+    }
+    @include b.md {
+        flex-direction: column;
+        #id_navbar {
+            flex-direction: column;
+            width: 100%;
+            .nav-link {
+                width: 100%;
+                border: 1px solid rgba(v.$black, .08);
+                padding: 0.65rem;
+                &:hover {
+                    background-color: rgba(v.$black, .1);
+                }
+            }
+            .separator {
+                height: 1px;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid rgba(v.$black, .4);
+                margin: 0.5rem 0;
+            }
+            #id_btn_logout {
+                background-color: rgba(v.$danger-color, .9);
+                color: v.$white;
+                &:hover {
+                    background-color: rgba(v.$danger-color, .8) !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,460 @@
+@use '../variables' as v;
+@use '../breakpoints' as b;
+
+
+.customer-form {
+    background-color: v.$white;
+    box-shadow: 0 0 20px rgba(v.$black, 0.2);
+    border: 1px solid rgba(v.$black, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 8px;
+    max-height: 90vh;
+    width: 100%;
+    max-width: v.$md;
+    
+    .btn-close-form {
+        cursor: pointer;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        padding: 2px;
+        border-radius: 2px;
+        transition: all 0.1s;
+        
+        &:hover {
+            background-color: rgba(v.$danger-color, 0.8);
+            stroke: v.$white;
+            svg {
+                stroke: v.$white;
+                fill: v.$white;
+                
+            }
+        }
+    }
+    .form-header {
+        border-bottom: 1px dashed rgba(v.$black, 0.25);
+        padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+        h3 {
+            font-size: 1rem;
+            color: rgba(v.$black, 0.85);
+        }
+    }
+    .form-inputs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem 0.25rem;
+        padding: 1rem 2rem;
+        overflow-y: scroll;
+        margin: 2px;
+
+        .form-input-container {
+            position: relative;
+            height: 100%;
+            .form-input {
+                width: 100%;
+                padding: 0.5rem;
+                font-size: 0.75rem;
+                font-weight: 500;
+                border-radius: 2px;
+                border: 1px solid rgba(v.$black, 0.15);
+                box-shadow: inset 0 0 2px rgba(v.$black, 0.05);
+                resize: none;
+                appearance: none;
+                &:focus {
+                    outline: none;
+                    border: 1px solid v.$info-color;
+                }
+                &:focus ~ .floating-label {
+                    color: v.$info-color;
+                }
+                &:focus ~ .floating-label, &:not(:placeholder-shown) ~ .floating-label {
+                    top: -0.4rem;
+                    left: 0.25rem;
+                }
+                &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;margin: 0;
+                }
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover, 
+                &:-webkit-autofill:focus, 
+                &:-webkit-autofill:active{
+                    -webkit-box-shadow: 0 0 0 30px v.$white inset !important;
+                }
+            }
+            select.form-input {
+                font-size: 0.6875rem;
+                height: 100%;
+            }
+            .floating-label {
+                position: absolute;
+                left: 0.4rem;
+                top: 10px;
+                background-color: v.$white;
+                font-size: 0.6875rem;
+                font-weight: 600;
+                color: rgba(v.$black, 0.65);
+                pointer-events: none;
+                padding: 0 0.25rem;
+                transition: all 0.1s;
+            }        
+        }
+        .form-inputs-header {
+            position: relative;
+            height: 1rem;
+            p {
+                position: absolute;
+                font-size: 0.75rem;
+                font-weight: 700;
+                background-color: v.$white;
+                z-index: 20;
+                padding: 0 0.5rem;
+                left: 0.5rem;
+            }
+            hr {
+                position: absolute;
+                border-bottom: 1px solid rgba(v.$black, 0.5);
+                width: 100%;
+                top: 0;
+                bottom: 0;
+            }
+            
+        }
+        .cs-2 {
+            grid-column: span 2;
+        }
+        .cs-3 {
+            grid-column: span 3;
+        }
+        &::-webkit-scrollbar {
+            width: 2px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(v.$black, 0.25);
+        }
+    }
+    .form-btns {
+        padding: 0.5rem 2rem;
+        border-top: 1px dashed rgba(v.$black, 0.25);
+        .btn {
+            display: block;
+            padding: 0.375rem 2rem;
+            margin-left: auto;
+        }
+    }
+
+    @include b.sm {
+        .form-inputs {
+            grid-template-columns: repeat(2, 1fr);
+            .cs-3 {
+                grid-column: span 2;
+            }
+        }
+    }
+    @include b.xs {
+        .form-inputs {
+            grid-template-columns: 1fr;
+            .cs-2 {
+                grid-column: span 1;
+            }
+            .cs-3 {
+                grid-column: span 1;
+            }
+        }
+    }
+}
+
+#id_customer_create_form {
+    .form-inputs {
+        #id_check_contract_number {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0.5rem 0.5rem;
+            border-radius: 2px;
+            width: fit-content;
+            p {
+                text-wrap: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 0.625rem;
+                font-weight: 600;
+            }
+        }
+        .status-waiting {
+            background-color: rgba(v.$warning-color, 0.05);
+            color: rgba(v.$warning-color, 0.8);
+            border: 1px solid rgba(v.$warning-color, 0.3);
+        }
+        .status-invalid {
+            background-color: rgba(v.$danger-color, 0.1);
+            color: rgba(v.$danger-color, 0.8);
+            border: 1px solid rgba(v.$danger-color, 0.2);
+        }
+        .status-valid {
+            background-color: rgba(v.$success-color, 0.1);
+            color: rgba(v.$success-color, 0.8);
+            border: 1px solid rgba(v.$success-color, 0.2);
+        }
+    }
+    #id_btn_create_customer {
+        &:disabled {
+            cursor: default;
+            background-color: rgba(v.$info-color, 0.75);
+        }
+    }
+    @include b.sm {
+        .form-inputs {
+            #id_check_contract_number {
+                grid-column: span 1;
+                width: 100%;
+                overflow-y: hidden;
+            }
+        }
+    }
+    @include b.xs {
+        .form-inputs {
+            #id_check_contract_number {
+                overflow: visible   ;
+            }
+        }
+    }
+}
+
+    /*
+    .-header {
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h3 {
+            font-weight: 700;
+            font-size: 2rem;
+        }
+        .btn-close-form {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 2px;
+            transition: all 0.1s;
+            background-color: v.$danger-color;
+            svg {
+                stroke: v.$white;
+                path {
+                    fill: v.$white;
+                }
+            }
+            &:hover {
+                background-color: rgba(v.$danger-color, 0.75);
+                svg {
+                    stroke: v.$white;
+                    path {
+                        fill: v.$white;
+                    }
+                }
+            }
+            
+        }
+    }
+    .form-fields {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1rem;
+        gap: 1rem;
+        overflow-y: scroll;
+        max-height: 500px;
+
+        .form-field {
+            position: relative;
+            height: fit-content;
+            .floating-label {
+                position: absolute;
+                left: 0.4rem;
+                top: 12px;
+                background-color: v.$white;
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: rgba(v.$black, 0.5);
+                pointer-events: none;
+                padding: 0 0.25rem;
+                transition: all 0.1s;
+            }
+            .form-input {
+                background-color: v.$white;
+                border-radius: 2px;
+                padding: 0.5rem;
+                appearance: none;
+                font-size: 0.75rem;
+                font-weight: 500;
+                border: 1px solid rgba(v.$black, 0.1);
+                height: 2.35rem;
+                resize: none;
+                width: 100%; 
+                &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;margin: 0;
+                }
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover, 
+                &:-webkit-autofill:focus, 
+                &:-webkit-autofill:active{
+                    -webkit-box-shadow: 0 0 0 30px v.$white inset !important;
+                }
+                
+                &:disabled {
+                    background-color: v.$white;
+                }
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+                &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                    -webkit-appearance: none;margin: 0;
+                }
+
+                
+            }
+            &:has(textarea) {
+                grid-column: 1 / -1;
+                textarea {
+                    height: auto !important;
+                }
+            }
+           
+
+            .form-input:focus {
+                outline: none;
+                border: 1px solid v.$info-color;
+            }
+            .form-input:focus ~ .floating-label {
+                color: v.$info-color;
+            }
+            .form-input:focus ~ .floating-label, .form-input:not(:placeholder-shown) ~ .floating-label {
+                font-size: 0.7rem;
+                top: -0.4rem;
+                left: 0.25rem;
+            }
+        }
+        #id_input_name_container {
+            grid-column: 1 / -1;
+        }
+        .separator-w-p {
+            position: relative;
+            display: flex;
+            align-items: center;
+            grid-column: 1 / -1;
+            .separator {
+                border-bottom: 1px solid rgba(v.$black, 0.25);
+                width: 100%;
+                position: absolute;
+            }
+            p {
+                text-wrap: nowrap;
+                background-color: v.$white;
+                z-index: 10;
+                padding: 0 0.25rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                margin-left: 0.5rem;
+                color: rgba(v.$black, 0.75);
+            }
+        }
+
+        &::-webkit-scrollbar {
+            width: 2px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(v.$black, 0.5);
+        }  
+    }
+    .form-btns {
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.25rem;
+        grid-column: 1/-1;  
+        .btn {
+            padding: 0.55rem 1rem;
+            flex: 1;
+            text-wrap: nowrap;
+            background-color: v.$info-color;
+            color: v.$white;
+            font-weight: 500;
+            border-radius: 2px;
+            &:hover {
+                background-color:  rgba(v.$info-color, 0.8);
+            }
+        }
+        .btn-cancel {
+            background-color: v.$danger-color;
+            color: v.$white;
+            &:hover {
+                background-color:  rgba(v.$danger-color, 0.8);
+            }
+        }
+        .btn-success {
+            background-color: v.$success-color;
+            color: v.$white;
+            &:hover {
+                background-color:  rgba(v.$success-color, 0.8);
+            }
+        }
+        .btn-alt {
+            background-color: v.$secondary-color;
+            color: v.$white;
+            &:hover {
+                background-color:  rgba(v.$secondary-color, 0.8);
+            }
+        }
+    }
+    
+    .form-input-textarea {
+        padding: 0.75rem 0.5rem !important;
+        height: auto !important;
+    }
+    @include b.sm {
+        .form-btns {
+            flex-direction: column;
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+    .form-btns {
+        background-color: v.$white;
+        padding: 0.5rem  1rem;
+        border-top: 1px solid rgba(v.$black, 0.75);
+    }
+}
+
+#id_customer_create_form {
+    #id_check_contract_number {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.55rem 3rem 0.55rem 1rem;
+        border-radius: 2px;
+        width: fit-content;
+    }
+    .status-waiting {
+        background-color: rgba(v.$warning-color, 0.05);
+        color: rgba(v.$warning-color, 0.8);
+        border: 1px solid rgba(v.$warning-color, 0.3);
+    }
+    .status-invalid {
+        background-color: rgba(v.$danger-color, 0.1);
+        color: rgba(v.$danger-color, 0.8);
+        border: 1px solid rgba(v.$danger-color, 0.2);
+    }
+    .status-valid {
+        background-color: rgba(v.$success-color, 0.1);
+        color: rgba(v.$success-color, 0.8);
+        border: 1px solid rgba(v.$success-color, 0.2);
+    }
+}*/

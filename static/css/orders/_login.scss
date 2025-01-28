@@ -1,0 +1,91 @@
+@use '../variables' as v;
+@use '../breakpoints' as b;
+
+
+#id_login_page {
+    height: 100vh;
+    padding: .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(v.$black, .02);
+    
+    #id_login_form {
+        background-color: v.$white;
+        border-radius: 4px;
+        max-width: 25rem;
+        width: 100%;
+        margin: auto;
+        padding: 2.5rem;
+        border: 1px solid rgba(v.$black, .08);
+        box-shadow: 0px 0px .5rem rgba(v.$black, .08);
+        
+        #id_header_login_form {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            .login-logo {
+                height: 2.25rem;
+            }
+           
+            h1 {
+                color: rgba(v.$black, .8);
+                font-size: 1rem;
+                font-weight: 700;
+            }
+        }
+        #id_inputs_login_form {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            margin-bottom: .75rem;
+            .input-w-icon {
+                border: 1px solid rgba(v.$black, .08);
+                display: flex;
+                align-items: center;
+                border-radius: .25rem;
+                overflow: hidden;
+                transition: all .1s;
+                .login-form-input {
+                    border: none;
+                    padding: .875rem;
+                    font-size: .875rem;
+                    font-weight: 500;
+                    width: 100%;
+                    outline: none;
+                }
+                .icon {
+                    margin: 0 .5rem;
+                }
+                &:has(.login-form-input:focus) {
+                    border: 1px solid rgba(v.$black, .6);
+                }
+                &:has(.error) {
+                    border: 1px solid rgba(v.$danger-color, .75);
+                }
+            }
+        }
+        .text-error {
+            margin-top: .75rem;
+            background-color: rgba(v.$danger-color, .06);
+            font-size: .75rem;
+            font-weight: 600;
+            padding: .875rem;
+            color: rgba(v.$danger-color, .8);
+            text-align: start;
+        }
+        .btn {
+            margin-top: .75rem;
+            font-weight: 600;
+            width: 100%;
+            padding: .75rem;
+            &:hover {
+                background-color: rgba($color: v.$primary-color, $alpha: .8);
+            }
+        }
+        @include b.sm {
+            padding: 2rem 1.5rem;
+        }
+    }
+}

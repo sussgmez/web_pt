@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" >
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- CSS Normalize -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Web PT | {% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <!-- Header -->
+    <header id="id_header">
+        <a id="id_logo" href="{% url 'customer-page' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Web_pt">
+        </a>
+        <nav id="id_navbar">
+            <a class="nav-link" href="{% url 'customer-page' %}">Inicio</a>
+            <a class="nav-link" href="">Agenda</a>
+            {% if user.is_staff %}    
+            <a class="nav-link" href="">Inventario</a>
+            {% endif %}
+            <hr class="separator">
+            <a class="nav-link" id="id_btn_logout" href="{% url 'logout' %}">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    {% endif %}
+
+    {% block content %}
+    {% endblock content %}
+
+    <!-- Footer -->
+    <footer id="id_footer">
+        <p>Piccioli Telco</p>
+    </footer>
+
+    <div id="id_alert_messages">
+        {% for message in messages %}
+            <p class="{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/App.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+    
+</body>
+</html>
