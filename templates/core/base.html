@@ -19,9 +19,14 @@
     {% if user.is_authenticated %}
     <!-- Header -->
     <header id="id_header">
-        <a id="id_logo" href="{% url 'customer-page' %}">
-            <img src="{% static 'img/logo.png' %}" alt="Web_pt">
-        </a>
+        <div class="logo-w-menu">
+            <a id="id_logo" href="{% url 'customer-page' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Web_pt">
+            </a>
+            <div id="id_btn_menu">
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12H20M4 8H20M4 16H12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </div>
+        </div>
         <nav id="id_navbar">
             <a class="nav-link" href="{% url 'customer-page' %}">Inicio</a>
             <a class="nav-link" href="">Agenda</a>
@@ -29,7 +34,11 @@
             <a class="nav-link" href="">Inventario</a>
             {% endif %}
             <hr class="separator">
-            <a class="nav-link" id="id_btn_logout" href="{% url 'logout' %}">Cerrar Sesión</a>
+            <a class="nav-link" id="id_btn_logout" href="{% url 'logout' %}">
+                
+                <svg width="12px" height="12px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="16" height="16" id="icon-bound" fill="none"></rect> <path d="M14,14l0,-12l-6,0l0,-2l8,0l0,16l-8,0l0,-2l6,0Zm-9.002,-0.998l-4.998,-5.002l5,-5l1.416,1.416l-2.588,2.584l8.172,0l0,2l-8.172,0l2.586,2.586l-1.416,1.416Z"></path> </g></svg>
+                <p>Cerrar sesión</p>
+            </a>
         </nav>
     </header>
 
