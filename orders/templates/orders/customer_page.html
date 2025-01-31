@@ -44,15 +44,13 @@
                     {% endfor %}
                 </select>
             </div>
-            <div id="id_filters_assigned_date">
-                <div class="filter-w-label">
-                    <label for="id_filter_from_date" class="label">Desde</label>
-                    <input class="filter" onchange="get_customer_list()" type="date" id="id_filter_from_date" disabled>
-                </div>
-                <div class="filter-w-label">
-                    <label for="id_filter_to_date" class="label">Hasta</label>
-                    <input class="filter" onchange="get_customer_list()" type="date" id="id_filter_to_date" disabled>
-                </div>
+            <div class="filter-w-label">
+                <label for="id_filter_from_date" class="label">Desde</label>
+                <input class="filter" onchange="get_customer_list()" type="date" id="id_filter_from_date" disabled>
+            </div>
+            <div class="filter-w-label">
+                <label for="id_filter_to_date" class="label">Hasta</label>
+                <input class="filter" onchange="get_customer_list()" type="date" id="id_filter_to_date" disabled>
             </div>
             <div class="filter-w-label">
                 <label for="id_filter_technician" class="label">Técnico</label>
@@ -68,14 +66,22 @@
                 </select>
             </div>
             <div class="filter-w-label">
-                <label for="id_filter_order_by_input" class="label">Ordenar</label>
+                <label for="id_filter_delayedreason" class="label">R. Demora</label>
+                <select class="filter" id="id_filter_delayedreason" onchange="get_customer_list()" disabled> 
+                    <option value="-date_created">---------</option>
+                    <option value="date_received">Fecha de recepción</option>
+                    <option value="-pk" >Nro. De Contrato</option>
+                </select>
+            </div>
+            <div class="filter-w-label">
+                <label for="id_filter_order_by_input" class="label">Ordenar por</label>
                 <select class="filter" id="id_filter_order_by_input" onchange="get_customer_list()"> 
                     <option value="-date_created">Último añadido</option>
                     <option value="date_received">Fecha de recepción</option>
                     <option value="-pk" >Nro. De Contrato</option>
                 </select>
             </div>
-            <button id="id_btn_export_customers" class="btn" onclick="export_xlsx();">Exportar</button>
+            <button id="id_btn_export_customers" class="btn" onclick="export_xlsx();">Exportar clientes</button>
             <div id="id_get_xlsx" style="display: none;"></div>
         </div>
         <div id="id_customer_list"></div>

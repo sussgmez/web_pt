@@ -3,9 +3,9 @@
 
 /* Página de clientes */
 #id_customer_page {
-    padding: 2rem 0.5rem;
+    padding: 3rem 0.5rem;
     min-height: 100vh;
-    max-width: v.$md;
+    max-width: v.$lg;
     margin: auto;
     /* Cabecera de página */ 
     #id_customer_page_header {
@@ -14,14 +14,14 @@
         position: relative;
         margin-bottom: 1rem;
         h1 {
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-size: 1.75rem;
+            font-weight: 500;
         }
         /* Botón de menñu de añadir clientes */
         #id_btn_customers_create {
             padding: 0.5rem 2rem;
             &:hover {
-                background-color: rgba(v.$primary-color, 0.75);
+                background-color: rgba(v.$primary-color, 0.9);
             }
         }
         /* Opciones de creación de clientes */
@@ -68,7 +68,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         align-items: end;
-        gap: 0.5rem;
+        gap: 2px;
         margin-bottom: 2rem;
         max-width: v.$lg;
         .filter {
@@ -80,10 +80,14 @@
             font-weight: 500;
             background-color: v.$white;
             transition: all 0.1s;
-            border: 1px solid rgba(v.$black, 0.2);
+            border: 1px solid rgba(v.$black, 0.5);
             border-radius: 2px;
             &:focus {
                 outline: none;
+                border: 1px solid v.$black; 
+            }
+            &:hover {
+                border: 1px solid v.$black;
             }
         }
         #id_filter_text {
@@ -101,14 +105,21 @@
             overflow: hidden;
             height: 2rem;
             background-color: v.$white;
-            border: 1px solid rgba(v.$black, 0.2);
+            border: 1px solid rgba(v.$black, 0.5);
             transition: all 0.1s;
             border-radius: 2px;
             .label {
+                display: flex;
+                align-items: center;
                 font-weight: 600;
-                font-size: 0.7rem;
-                padding: 0.67rem;
-                width: 5.25rem;
+                justify-content: end;
+                font-size: 0.625rem;
+                padding: 0.5rem;
+                width:33%;
+                height: 100%;
+                text-wrap: nowrap;
+                background-color: rgba(v.$black, 0.1);
+                border-right: 1px solid rgba(v.$black, 0.2);
             }
             .filter {
                 width: 100%;
@@ -120,7 +131,7 @@
                 }
             }
             &:has(.filter:disabled) {
-                border: 1px solid rgba(v.$black, 0.1) !important;
+                border: 1px solid rgba(v.$black, 0.3) !important;
                 box-shadow: unset;
                 background-color: rgba(v.$black, 0.1);
                 .label {
@@ -130,16 +141,23 @@
                     cursor: default;
                 }
             }
+            
+            &:hover, &:has(.filter:focus){
+                border: 1px solid v.$black;
+            }
         }
         #id_btn_export_customers {
             background-color: v.$success-color;
-            font-weight: 500;
-            padding: 0.5rem 2.5rem;
-            width: fit-content;
+            font-weight: 600;
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
             grid-column: -2;
             margin-left: auto;
+            font-size: 0.6875rem;
+            border: 1px solid rgba(v.$black, .5);
             &:hover {
-                background-color: rgba(v.$success-color, 0.6);
+                background-color: rgba(v.$success-color, 0.9);
             }
         }
         @include b.lg {

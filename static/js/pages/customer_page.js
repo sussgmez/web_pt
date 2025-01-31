@@ -93,7 +93,7 @@ $(document).ready(function () {
 
     get_customer_list()
     // 
-    // get_customer_form('../customer/create', '#id_customer_create')
+    get_customer_form('../customer/create', '#id_customer_create')
 
     
 });
